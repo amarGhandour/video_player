@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task1</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        #container {
+            display: flex;
+            width: 70vw;
+            height: 80vh;
+            margin: 20px auto;
+            justify-content: space-between;
+            border: 2px solid black;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 10px 10px 40px #f3895f inset, -10px -10px 40px #f3895f inset;
+        }
+
+        #videosList {
+            display: flex;
+            flex-direction: column;
+            border: 2px solid black;
+            width: 10%;
+            padding: 1rem;
+            border-radius: 1rem;
+            flex: 0 0 18%;
+            box-shadow: 10px 10px 40px #faca73 inset, -10px -10px 40px #faca73 inset;
+        }
+
+        #videosList > div {
+            border: 2px solid black;
+            text-align: center;
+            background-color: white;
+        }
+        #videosList > div:hover {
+            background-color: #ff7d29;
+        }
+
+        #videosList > div button:first-child {
+            margin-top: 0.5rem;
+        }
+
+        #videoPlaying {
+            flex: 0 0 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid black;
+            border-radius: 2rem;
+            box-shadow: 10px 10px 40px #faca73 inset, -10px -10px 40px #faca73 inset;
+        }
+        #videoPlaying > video {
+            border-radius: 2rem;
+            transition: all 2s;
+        }
+
+        button {
+            margin-bottom: 0.5rem;
+            border: 3px solid #2525fa;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1.5rem;
+            background-color: inherit;
+            transition: transform 2s;
+        }
+
+        button:hover {
+            background-color: white;
+            transform: rotate(360deg);
+            transition: transform 2s, background-color 2s;
+        }
+
+        .active {
+        }
+
+
+    </style>
+
+    <script>
+        window.addEventListener('load', function (){
+           let myVideo = document.querySelector('#videoPlaying video');
+            myVideo.play();
+
+            myVideo.addEventListener('click', function (e){
+                myVideo.paused === true? myVideo.play(): myVideo.pause();
+            });
+
+            myVideo.addEventListener('mouseover', function (){
+                myVideo.style.width = "100%";
+            });
+
+            myVideo.addEventListener('mouseleave', function (){
+                myVideo.style.width = "400px";
+            });
+
+            myVideo.addEventListener('dblclick', function (){
+                myVideo.requestFullscreen();
+            });
+
+
+            let videoButtons = document.querySelectorAll('button');
+
+            videoButtons.forEach(function (btn){
+                btn.addEventListener('click', function (){
+
+                    let current = document.querySelector('.active');
+
+                    if (current){
+                        current.style.backgroundColor = 'inherit';
+                        current.classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    this.style.transition = 'background-color 1s';
+                    this.style.backgroundColor = 'blue';
+
+                    myVideo.setAttribute('src',btn.value);
+                    myVideo.play();
+                });
+            });
+
+
+        });
+    </script>
+</head>
+<body>
+
+<main id="container">
+        <div id="videosList">
+           <div>
+               <button value="lesson2_Downloadly.ir.mp4">video1</button>
+               <button value="ww.mp4">video1</button>
+               <button value="lesson2_Downloadly.ir.mp4">video1</button>
+               <button value="lesson2_Downloadly.ir.mp4">video1</button>
+               <button value="ww.mp4">video1</button>
+               <button value="lesson2_Downloadly.ir.mp4">video1</button>
+               <button value="lesson2_Downloadly.ir.mp4">video1</button>
+               <button value="ww.mp4">video1</button>
+               <button value="lesson2_Downloadly.ir.mp4">video1</button>
+           </div>
+        </div>
+        <div id="videoPlaying">
+                <video src="ww.mp4" muted width="400"></video>
+        </div>
+</main>
+
+</body>
+</html>
